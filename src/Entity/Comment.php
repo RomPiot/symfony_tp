@@ -26,6 +26,18 @@ class Comment
      */
     private $created_at;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Post", inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $post;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -51,6 +63,30 @@ class Comment
     public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getPost(): ?Post
+    {
+        return $this->post;
+    }
+
+    public function setPost(?Post $post): self
+    {
+        $this->post = $post;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }
