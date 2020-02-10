@@ -44,14 +44,14 @@ class User
     private $comments;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default": 1})
      */
-    private $isActive;
+    private $isActive = 1;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default": 0})
      */
-    private $isBlocked;
+    private $isBlocked = 0;
 
     public function __construct()
     {

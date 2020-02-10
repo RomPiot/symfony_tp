@@ -45,14 +45,14 @@ class Post
     private $comments;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default": 1})
      */
-    private $isPublished;
+    private $isPublished = 1;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default": 0})
      */
-    private $isDeleted;
+    private $isDeleted = 0;
 
     public function __construct()
     {

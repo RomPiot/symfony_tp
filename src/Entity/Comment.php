@@ -39,9 +39,9 @@ class Comment
     private $author;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default": 0})
      */
-    private $isDeleted;
+    private $isDeleted = 0;
 
     public function __toString(): string
     {
