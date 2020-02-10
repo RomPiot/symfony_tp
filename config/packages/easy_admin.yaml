@@ -10,6 +10,7 @@ easy_admin:
                     - { property: 'name', label: 'Prénom' }
                     - { property: 'lastName', label: 'Nom' }
                     - { property: 'email', label: 'Email' }
+                    - { property: 'isActive', label: 'Actif ?' }
         Post:
             class: App\Entity\Post
             list:
@@ -18,6 +19,8 @@ easy_admin:
                     - { property: 'title', label: 'Titre' }
                     - { property: 'author', label: 'Autheur' }
                     - { property: 'created_at', label: 'Créer le' }
+                    - { property: 'isPublished', label: 'Publié ?' }
+
         Comment:
             class: App\Entity\Comment
             list:
@@ -26,3 +29,5 @@ easy_admin:
                     - { property: 'title', label: 'Titre' }
                     - { property: 'author', label: 'Autheur' }
                     - { property: 'created_at', label: 'Créer le' }
+                    - { property: 'isPublished', label: 'Publié ?' }
+
