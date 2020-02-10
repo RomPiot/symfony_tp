@@ -49,6 +49,11 @@ class User
         $this->comments = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return $this->getName() . " " . $this->getLastname();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

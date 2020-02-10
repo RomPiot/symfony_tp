@@ -21,10 +21,10 @@
 > Les migrations permettent de générer des fichiers de déploiement de base de données. Ainsi, n'importe qui travaillant sur le projet pourra avoir exactement le même schéma de BDD que le reste de l'équipe, car la BDD est directement créer à partir des fichiers de migrations générés par Doctrine.
 
 #### Travail préparatoire : Qu'est-ce que EasyAdmin ?
->
+> C'est un service permettant de créer un backend administrateur pré-configuré afin de faciliter la création et la gestion de nos entity avec un affichage déjà tout fait
 
 #### Pourquoi doit-on implémenter des méthodes to string dans nos entités ?
->
+> Afin de permettre d'afficher le contenu voulu lors de l'appel a cette classe
 
 #### Qu'est ce que le ParamResolver ?
 >
