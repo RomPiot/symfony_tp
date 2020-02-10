@@ -4,6 +4,12 @@ easy_admin:
 #        # List the entity class name you want to manage
         User:
             class: App\Entity\User
+            form:
+                fields:
+                    - { property: 'name', label: 'Prénom' }
+                    - { property: 'lastName', label: 'Nom' }
+                    - { property: 'email', label: 'Email' }
+                    - { property: 'isActive', label: 'Actif ?' }
             list:
                 max_results: 10
                 fields:
@@ -11,6 +17,8 @@ easy_admin:
                     - { property: 'lastName', label: 'Nom' }
                     - { property: 'email', label: 'Email' }
                     - { property: 'isActive', label: 'Actif ?' }
+                    - { property: 'isBlocked', label: 'Bloqué ?' }
+
         Post:
             class: App\Entity\Post
             list:
@@ -20,14 +28,24 @@ easy_admin:
                     - { property: 'author', label: 'Autheur' }
                     - { property: 'created_at', label: 'Créer le' }
                     - { property: 'isPublished', label: 'Publié ?' }
+                form:
+                    fields:
+                        - { property: 'title', label: 'Titre' }
+                        - { property: 'author', label: 'Autheur' }
+                        - { property: 'created_at', label: 'Créer le' }
+                        - { property: 'isPublished', label: 'Publié ?' }
 
         Comment:
             class: App\Entity\Comment
             list:
                 max_results: 10
                 fields:
-                    - { property: 'title', label: 'Titre' }
                     - { property: 'author', label: 'Autheur' }
                     - { property: 'created_at', label: 'Créer le' }
-                    - { property: 'isPublished', label: 'Publié ?' }
+                    - { property: 'isDeleted', label: 'Supprimé ?' }
+                form:
+                    fields:
+                        - { property: 'author', label: 'Autheur' }
+                        - { property: 'created_at', label: 'Créer le' }
+                        - { property: 'isDeleted', label: 'Supprimé ?' }
 

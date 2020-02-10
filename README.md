@@ -19,6 +19,7 @@
 
 #### Expliquer l'intérêt des migrations d'une base de données
 > Les migrations permettent de générer des fichiers de déploiement de base de données. Ainsi, n'importe qui travaillant sur le projet pourra avoir exactement le même schéma de BDD que le reste de l'équipe, car la BDD est directement créer à partir des fichiers de migrations générés par Doctrine.
+> Elle permet également de revenir en arrière dans le cas d'une mise à jour non concluante.
 
 #### Travail préparatoire : Qu'est-ce que EasyAdmin ?
 > C'est un service permettant de créer un backend administrateur pré-configuré afin de faciliter la création et la gestion de nos entity avec un affichage déjà tout fait

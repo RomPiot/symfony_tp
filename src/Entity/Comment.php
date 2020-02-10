@@ -43,6 +43,11 @@ class Comment
      */
     private $isDeleted;
 
+    public function __toString(): string
+    {
+        return $this->getContent();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
