@@ -13,10 +13,12 @@
 > 	- **ManyToOne** : Comment est attaché à un User
 
 #### Expliquer ce qu'est le fichier .env
-> 
+### Expliquer pourquoi il faut changer le connecteur à la base de données
+> C'est un fichier definissant des constantes globales permettant d'être utilisées sur tout le site.
+> Il faut changer le connecteur à la base de données car dans notre cas nous n'utilisons pas MySQL, mais SQLite.
 
 #### Expliquer l'intérêt des migrations d'une base de données
->
+> Les migrations permettent de générer des fichiers de déploiement de base de données. Ainsi, n'importe qui travaillant sur le projet pourra avoir exactement le même schéma de BDD que le reste de l'équipe, car la BDD est directement créer à partir des fichiers de migrations générés par Doctrine.
 
 #### Travail préparatoire : Qu'est-ce que EasyAdmin ?
 >
