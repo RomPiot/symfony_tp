@@ -25,7 +25,7 @@
 > C'est un service permettant de créer un backend administrateur pré-configuré afin de faciliter la création et la gestion de nos entity avec un affichage déjà tout fait
 
 #### Pourquoi doit-on implémenter des méthodes to string dans nos entités ?
-> Afin de permettre d'afficher le contenu voulu lors de l'appel a cette classe
+> Afin de permettre d'afficher le contenu voulu lors de l'appel a cette classe. Utile avec easyPHP qui en a besoin pour afficher l'intitulé lors de relations.
 
 #### Qu'est ce que le ParamResolver ?
 >

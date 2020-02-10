@@ -3,10 +3,26 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <link rel="stylesheet" type="text/css" href="/style.css">
+        {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <a class="homepage" href="{{ path('post') }}">Homepage</a>
+        <div class="title">
+            <h1>{% block mainTitle %}BLOG{% endblock %}</h1>
+        </div>
+        <div class="full-content">
+            <div class="main-content">
+                {% block content %}Aucun résultat.{% endblock %}
+            </div>
+            <aside class="sidebar">
+                <div class="user-connected">
+                    <div class="logo">{% block logo %}Logo{% endblock %}</div>
+                    <p class="username">{% block username %}Username{% endblock %}</p>
+                </div>
+            </aside>
+        </div>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
