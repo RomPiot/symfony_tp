@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,6 +43,12 @@ class Comment
      * @ORM\Column(type="boolean", options={"default": 0})
      */
     private $isDeleted = 0;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+        $this->created_at = new \DateTime();
+    }
 
     public function __toString(): string
     {

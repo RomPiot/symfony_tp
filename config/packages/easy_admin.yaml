@@ -28,12 +28,12 @@ easy_admin:
                     - { property: 'author', label: 'Autheur' }
                     - { property: 'created_at', label: 'Créer le' }
                     - { property: 'isPublished', label: 'Publié ?' }
-                form:
-                    fields:
-                        - { property: 'title', label: 'Titre' }
-                        - { property: 'author', label: 'Autheur' }
-                        - { property: 'created_at', label: 'Créer le' }
-                        - { property: 'isPublished', label: 'Publié ?' }
+            form:
+                fields:
+                    - { property: 'title', label: 'Titre' }
+                    - { property: 'content', label: 'Contenu' }
+                    - { property: 'author', label: 'Autheur' }
+                    - { property: 'isPublished', label: 'Publié ?' }
 
         Comment:
             class: App\Entity\Comment
@@ -43,9 +43,9 @@ easy_admin:
                     - { property: 'author', label: 'Autheur' }
                     - { property: 'created_at', label: 'Créer le' }
                     - { property: 'isDeleted', label: 'Supprimé ?' }
-                form:
-                    fields:
-                        - { property: 'author', label: 'Autheur' }
-                        - { property: 'created_at', label: 'Créer le' }
-                        - { property: 'isDeleted', label: 'Supprimé ?' }
+            form:
+                fields:
+                    - { property: 'author', label: 'Autheur' }
+                    - { property: 'content', label: 'Contenu' }
+                    - { property: 'post', label: 'Post' }
 
