@@ -22,6 +22,7 @@ body {
 
 .main-content {
     width: 80%;
+    padding: 20px 50px;
 }
 
 .sidebar {
@@ -33,7 +34,7 @@ body {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
-    margin: 10px 5px;
+    margin: 10px 0px;
     padding: 0 10px;
 }
 
@@ -70,4 +71,20 @@ body {
     position: absolute;
     top: 10px;
     left: 10px;
+}
+
+.all-comments {
+    border-top: 1px solid black;
+    height: 100%;
+    margin-top: 30px;
+    padding: 20px 0;
+    background-color: #d3d3d3;
+}
+
+.one-comment {
+    border: 1px solid black;
+    border-radius: 3px;
+    margin: 10px;
+    padding: 0 10px;
+    background-color: white;
 }

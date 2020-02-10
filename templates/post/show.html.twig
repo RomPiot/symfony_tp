@@ -6,7 +6,15 @@
             <p class="post-content">{{ post.content }}</p>
         </div>
 
-    {{ dump(comments) }}
+    <div class="all-comments">
+        {% for comment in comments %}
+            <div class="one-comment">
+                <p>De {{ comment.author.name }} {{ comment.author.lastname }}, le {{ comment.createdAt|date('d-m-Y') }} à {{ comment.createdAt|date('H:i') }}</p>
+                <p>{{ comment.content }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
 {% endblock %}
 
 {% block body %}

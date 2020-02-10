@@ -49,3 +49,4 @@ easy_admin:
                     - { property: 'content', label: 'Contenu' }
                     - { property: 'post', label: 'Post' }
 
+
