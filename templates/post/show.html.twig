@@ -1,5 +1,4 @@
 {% extends 'base.html.twig' %}
-
 {% block mainTitle %}{{ post.title }}{% endblock %}
 {% block content %}
         <div class="the-post">
@@ -14,5 +13,7 @@
             </div>
         {% endfor %}
     </div>
+
+    {% include 'comment/add.html.twig' %}
 
 {% endblock %}

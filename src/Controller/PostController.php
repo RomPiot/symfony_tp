@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Post;
 use App\Repository\PostRepository;
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -25,16 +29,26 @@ class PostController extends AbstractController
 	 /**
      * @Route("/post/add", name="post_add")
      */
-	public function add()
+	public function add(UserRepository $userRepository, Request $request, EntityManagerInterface $em)
     {
+        $user = $userRepository->find(1);
 		$post = new Post();
-		// $post->setAuthor()
+		$post->setAuthor($user);
 
         $form = $this->createFormBuilder($post)
             ->add('title')
             ->add('content')
             ->add('save', SubmitType::class, ['label' => 'Créer'])
             ->getForm();
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()){
+//            dd($post);
+             $em->persist($post);
+             $em->flush();
+
+            return $this->redirectToRoute("post");
+        }
 
         return $this->render('post/add.html.twig', [
             'form' => $form->createView()
@@ -44,15 +58,36 @@ class PostController extends AbstractController
     /**
      * @Route("/post/{id}", name="post_show")
      */
-    public function show($id, PostRepository $postRepository)
+    public function show($id, PostRepository $postRepository, UserRepository $userRepository, Request $request, EntityManagerInterface $em)
     {
         $post = $postRepository->find($id);
         $comments = $post->getComments();
 
+        $user = $userRepository->find(1);
+
+        $comment = new Comment();
+        $comment->setPost($post);
+        $comment->setAuthor($user);
+
+        $form = $this->createFormBuilder($comment)
+            ->add('content', TextareaType::class, ['label' => 'Contenu'])
+            ->add('save', SubmitType::class, ['label' => 'Envoyer'])
+            ->getForm();
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()){
+            $em->persist($comment);
+            $em->flush();
+
+            return $this->redirectToRoute("post_show", ["id" => $id]);
+
+        }
+
 
         return $this->render('post/show.html.twig', [
             'post' => $post,
-            'comments' => $comments
+            'comments' => $comments,
+            'form'=> $form->createView()
         ]);
 	}
 	

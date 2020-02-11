@@ -13,8 +13,9 @@
 > 	- **ManyToOne** : Comment est attaché à un User
 
 #### Expliquer ce qu'est le fichier .env
-### Expliquer pourquoi il faut changer le connecteur à la base de données
 > C'est un fichier definissant des constantes globales permettant d'être utilisées sur tout le site.
+
+#### Expliquer pourquoi il faut changer le connecteur à la base de données
 > Il faut changer le connecteur à la base de données car dans notre cas nous n'utilisons pas MySQL, mais SQLite.
 
 #### Expliquer l'intérêt des migrations d'une base de données
@@ -31,7 +32,7 @@
 >
 
 #### Qu'est ce qu'un formulaire Symfony ?
->
+> C'est un service permettant de créer des formulaires directement via les champs de l'Entity mentionné.
 
-#### Pourquoi utiliser des formulaires directement en PHP ?
->
+#### Quels avantages offrent l'usage d'un formulaire ?
+> Il permettent une création et une personnalisation rapide et complète de formulaires
