@@ -2,95 +2,93 @@
 
 namespace App\Controller;
 
-use App\Entity\Comment;
+
 use App\Entity\Post;
+use App\Entity\Comment;
 use App\Repository\PostRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class PostController extends AbstractController
 {
-    /**
-     * @Route("/", name="post")
-     */
-    public function index(PostRepository $postRepository)
-    {
-        $posts = $postRepository->findAll();
-        return $this->render('post/index.html.twig', [
-            'posts' => $posts
-        ]);
-    }
+	/**
+	 * @Route("/", name="post")
+	 */
+	public function index(PostRepository $postRepository)
+	{
+		$posts = $postRepository->findAll();
+		return $this->render('post/index.html.twig', [
+			'posts' => $posts
+		]);
+	}
 
-	 /**
-     * @Route("/post/add", name="post_add")
-     */
+	/**
+	 * @Route("/post/add", name="post_add")
+	 */
 	public function add(UserRepository $userRepository, Request $request, EntityManagerInterface $em)
-    {
-        $user = $userRepository->find(1);
+	{
+		$user = $userRepository->find(1);
 		$post = new Post();
 		$post->setAuthor($user);
 
-        $form = $this->createFormBuilder($post)
-            ->add('title')
-            ->add('content')
-            ->add('save', SubmitType::class, ['label' => 'Créer'])
-            ->getForm();
-        $form->handleRequest($request);
+		$form = $this->createFormBuilder($post)
+			->add('title', TextType::class, ['label' => 'Titre'])
+			->add('content', TextareaType::class, ['label' => 'Contenu'])
+			->add('save', SubmitType::class, ['label' => 'Créer'])
+			->getForm();
+		$form->handleRequest($request);
 
-        if($form->isSubmitted()){
-//            dd($post);
-             $em->persist($post);
-             $em->flush();
+		if ($form->isSubmitted() && $form->isValid()) {
+			//            dd($post);
+			$em->persist($post);
+			$em->flush();
 
-            return $this->redirectToRoute("post");
-        }
+			return $this->redirectToRoute("post");
+		}
 
-        return $this->render('post/add.html.twig', [
-            'form' => $form->createView()
-        ]);
+		return $this->render('post/add.html.twig', [
+			'form' => $form->createView()
+		]);
 	}
-	
-    /**
-     * @Route("/post/{id}", name="post_show")
-     */
-    public function show($id, PostRepository $postRepository, UserRepository $userRepository, Request $request, EntityManagerInterface $em)
-    {
-        $post = $postRepository->find($id);
-        $comments = $post->getComments();
 
-        $user = $userRepository->find(1);
+	/**
+	 * @Route("/post/{id}", name="post_show")
+	 */
+	public function show($id, PostRepository $postRepository, UserRepository $userRepository, Request $request, EntityManagerInterface $em)
+	{
+		$post = $postRepository->find($id);
+		$comments = $post->getComments();
 
-        $comment = new Comment();
-        $comment->setPost($post);
-        $comment->setAuthor($user);
+		$user = $userRepository->find(1);
 
-        $form = $this->createFormBuilder($comment)
-            ->add('content', TextareaType::class, ['label' => 'Contenu'])
-            ->add('save', SubmitType::class, ['label' => 'Envoyer'])
-            ->getForm();
-        $form->handleRequest($request);
+		$comment = new Comment();
+		$comment->setPost($post);
+		$comment->setAuthor($user);
 
-        if($form->isSubmitted()){
-            $em->persist($comment);
-            $em->flush();
+		$form = $this->createFormBuilder($comment)
+			->add('content', TextareaType::class, ['label' => 'Contenu'])
+			->add('save', SubmitType::class, ['label' => 'Envoyer'])
+			->getForm();
+		$form->handleRequest($request);
 
-            return $this->redirectToRoute("post_show", ["id" => $id]);
+		if ($form->isSubmitted() && $form->isValid()) {
+			$em->persist($comment);
+			$em->flush();
 
-        }
+			return $this->redirectToRoute("post_show", ["id" => $id]);
+		}
 
 
-        return $this->render('post/show.html.twig', [
-            'post' => $post,
-            'comments' => $comments,
-            'form'=> $form->createView()
-        ]);
+		return $this->render('post/show.html.twig', [
+			'post' => $post,
+			'comments' => $comments,
+			'form' => $form->createView()
+		]);
 	}
-	
-	
-   
 }
