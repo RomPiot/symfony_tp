@@ -36,9 +36,9 @@ class PostController extends AbstractController
             ->add('save', SubmitType::class, ['label' => 'Créer'])
             ->getForm();
 
-		return $this->render('post/add.html.twig', [
-			'form' => $form->createView()
-			]);
+        return $this->render('post/add.html.twig', [
+            'form' => $form->createView()
+        ]);
 	}
 	
     /**

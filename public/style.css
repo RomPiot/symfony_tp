@@ -67,11 +67,13 @@ body {
     margin-right: 10px;
 }
 
-.homepage {
+.menu {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 0;
+    left: 0;
+    display: flex;
 }
+
 
 .all-comments {
     border-top: 1px solid black;
@@ -87,4 +89,8 @@ body {
     margin: 10px;
     padding: 0 10px;
     background-color: white;
+}
+
+.menu-item {
+    padding: 10px;
 }
