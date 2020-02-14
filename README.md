@@ -28,11 +28,28 @@
 #### Pourquoi doit-on implémenter des méthodes to string dans nos entités ?
 > Afin de permettre d'afficher le contenu voulu lors de l'appel a cette classe. Utile avec easyPHP qui en a besoin pour afficher l'intitulé lors de relations.
 
-#### Qu'est ce que le ParamResolver ?
->
+#### Qu'est-ce que le ParamConverter ?
+> Il sert à déclarer directement des objets à partir des paramètres demandés dans la route
 
 #### Qu'est ce qu'un formulaire Symfony ?
 > C'est un service permettant de créer des formulaires directement via les champs de l'Entity mentionné.
 
 #### Quels avantages offrent l'usage d'un formulaire ?
 > Il permettent une création et une personnalisation rapide et complète de formulaires
+
+#### Définir les termes suivants : Encoder, Provider, Firewall, Access Control, Role, Voter
+> - **Encoder** : C'est ce qui permet de hasher des champs d'une entity avec un algorythm particulier
+> - **Provider** : 
+> - **Firewall** : 
+> - **Access Control** : 
+> - **Role** : 
+> - **Voter** : 
+
+#### Qu'est-ce que FOSUserBundle ? Pourquoi ne pas l'utiliser ?
+>
+
+#### Définir les termes suivants : Argon2i, Bcrypt, Plaintext, BasicHTTP
+> - **Argon2i** : 
+> - **Bcrypt** : 
+> - **Plaintext** : 
+> - **BasicHTTP** : C'est une authentification HTTP peu sécurisé et non chiffré, qui necessite de recevoir les informations utilisateur dans l'entête de la requête. Les navigateurs mettent donc en cache (et non pas en cookie ou en session comme il est commun de le faire), afin d'évité d'avoir à redemander les identifiants de connexion à l'utilisateur à chaque navigation de page.

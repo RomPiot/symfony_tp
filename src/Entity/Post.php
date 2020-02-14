@@ -47,12 +47,12 @@ class Post
     /**
      * @ORM\Column(type="boolean", options={"default": 1})
      */
-    private $isPublished = 1;
+    private $isPublished;
 
     /**
      * @ORM\Column(type="boolean", options={"default": 0})
      */
-    private $isDeleted = 0;
+    private $isDeleted;
 
     public function __construct()
     {
