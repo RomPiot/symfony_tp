@@ -9,6 +9,7 @@
         {% endblock %}
     </head>
     <body>
+		{% block body %}
         <div class="menu">
             <a class="menu-item" href="{{ path('post') }}">Accueil</a>
             <a class="menu-item" href="{{ path('post_add') }}">Ajouter Post</a>
@@ -27,6 +28,7 @@
                 </div>
             </aside>
         </div>
+		{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>

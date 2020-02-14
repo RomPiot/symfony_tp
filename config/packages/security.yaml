@@ -2,6 +2,11 @@ security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory: { memory: null }
+        in_database:
+            entity: 
+                class: App\Entity\User
+                property: email
+
     encoders:
         # use your user class name here
         App\Entity\User:
@@ -15,10 +20,13 @@ security:
             security: false
         main:
             anonymous: lazy
+            provider: in_database
+            form_login:
+                login_path: login
+                check_path: login
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
-
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
 

@@ -39,10 +39,10 @@
 
 #### Définir les termes suivants : Encoder, Provider, Firewall, Access Control, Role, Voter
 > - **Encoder** : C'est ce qui permet de hasher des champs d'une entity avec un algorythm particulier
-> - **Provider** : 
+> - **Provider** : C'est le fournisseur d'utilisateur permettant de dire à Symfony la classe et et le champ d'identification à utiliser pour la sécurité de la gestion de l'utilisateur connecté. Celui ci permet de faire des controles de session et de base de données sur l'utilisateur à chaque nouvelle requete.
 > - **Firewall** : 
 > - **Access Control** : 
-> - **Role** : 
+> - **Role** : Ce sont des permissions accordées à l'utilisateur
 > - **Voter** : 
 
 #### Qu'est-ce que FOSUserBundle ? Pourquoi ne pas l'utiliser ?
