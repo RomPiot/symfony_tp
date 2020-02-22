@@ -5,12 +5,13 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @ORM\HasLifeCycleCallbacks()
+ * @UniqueEntity(fields={"email"}, message="Un compte existe déjà avec cet email.")
  */
 class User implements UserInterface
 {
@@ -49,12 +50,12 @@ class User implements UserInterface
 	/**
 	 * @ORM\Column(type="boolean", options={"default": 1})
 	 */
-	private $isActive;
+	private $isActive = 1;
 
 	/**
 	 * @ORM\Column(type="boolean", options={"default": 0})
 	 */
-	private $isBlocked;
+	private $isBlocked = 0;
 
 	/**
 	 * @ORM\Column(type="json", options={"default": ""})
@@ -67,142 +68,142 @@ class User implements UserInterface
 	private $password;
 
 	public function __construct()
-	{
-		$this->posts = new ArrayCollection();
-		$this->comments = new ArrayCollection();
-	}
+      	{
+      		$this->posts = new ArrayCollection();
+      		$this->comments = new ArrayCollection();
+      	}
 
 	public function __toString(): string
-	{
-		return $this->getName() . " " . $this->getLastname();
-	}
+      	{
+      		return $this->getName() . " " . $this->getLastname();
+      	}
 
 	public function getId(): ?int
-	{
-		return $this->id;
-	}
+      	{
+      		return $this->id;
+      	}
 
 	public function getName(): ?string
-	{
-		return $this->name;
-	}
+      	{
+      		return $this->name;
+      	}
 
 	public function setName(string $name): self
-	{
-		$this->name = $name;
-
-		return $this;
-	}
+      	{
+      		$this->name = $name;
+      
+      		return $this;
+      	}
 
 	public function getLastname(): ?string
-	{
-		return $this->lastname;
-	}
+      	{
+      		return $this->lastname;
+      	}
 
 	public function setLastname(string $lastname): self
-	{
-		$this->lastname = $lastname;
-
-		return $this;
-	}
+      	{
+      		$this->lastname = $lastname;
+      
+      		return $this;
+      	}
 
 	public function getEmail(): ?string
-	{
-		return $this->email;
-	}
+      	{
+      		return $this->email;
+      	}
 
 	public function setEmail(string $email): self
-	{
-		$this->email = $email;
-
-		return $this;
-	}
+      	{
+      		$this->email = $email;
+      
+      		return $this;
+      	}
 
 	/**
 	 * @return Collection|Post[]
 	 */
 	public function getPosts(): Collection
-	{
-		return $this->posts;
-	}
+      	{
+      		return $this->posts;
+      	}
 
 	public function addPost(Post $post): self
-	{
-		if (!$this->posts->contains($post)) {
-			$this->posts[] = $post;
-			$post->setAuthor($this);
-		}
-
-		return $this;
-	}
+      	{
+      		if (!$this->posts->contains($post)) {
+      			$this->posts[] = $post;
+      			$post->setAuthor($this);
+      		}
+      
+      		return $this;
+      	}
 
 	public function removePost(Post $post): self
-	{
-		if ($this->posts->contains($post)) {
-			$this->posts->removeElement($post);
-			// set the owning side to null (unless already changed)
-			if ($post->getAuthor() === $this) {
-				$post->setAuthor(null);
-			}
-		}
-
-		return $this;
-	}
+      	{
+      		if ($this->posts->contains($post)) {
+      			$this->posts->removeElement($post);
+      			// set the owning side to null (unless already changed)
+      			if ($post->getAuthor() === $this) {
+      				$post->setAuthor(null);
+      			}
+      		}
+      
+      		return $this;
+      	}
 
 	/**
 	 * @return Collection|Comment[]
 	 */
 	public function getComments(): Collection
-	{
-		return $this->comments;
-	}
+      	{
+      		return $this->comments;
+      	}
 
 	public function addComment(Comment $comment): self
-	{
-		if (!$this->comments->contains($comment)) {
-			$this->comments[] = $comment;
-			$comment->setUser($this);
-		}
-
-		return $this;
-	}
+      	{
+      		if (!$this->comments->contains($comment)) {
+      			$this->comments[] = $comment;
+      			$comment->setUser($this);
+      		}
+      
+      		return $this;
+      	}
 
 	public function removeComment(Comment $comment): self
-	{
-		if ($this->comments->contains($comment)) {
-			$this->comments->removeElement($comment);
-			// set the owning side to null (unless already changed)
-			if ($comment->getUser() === $this) {
-				$comment->setUser(null);
-			}
-		}
-
-		return $this;
-	}
+      	{
+      		if ($this->comments->contains($comment)) {
+      			$this->comments->removeElement($comment);
+      			// set the owning side to null (unless already changed)
+      			if ($comment->getUser() === $this) {
+      				$comment->setUser(null);
+      			}
+      		}
+      
+      		return $this;
+      	}
 
 	public function getIsActive(): ?bool
-	{
-		return $this->isActive;
-	}
+      	{
+      		return $this->isActive;
+      	}
 
 	public function setIsActive(bool $isActive): self
-	{
-		$this->isActive = $isActive;
-
-		return $this;
-	}
+      	{
+      		$this->isActive = $isActive;
+      
+      		return $this;
+      	}
 
 	public function getIsBlocked(): ?bool
-	{
-		return $this->isBlocked;
-	}
+      	{
+      		return $this->isBlocked;
+      	}
 
 	public function setIsBlocked(bool $isBlocked): self
-	{
-		$this->isBlocked = $isBlocked;
-
-		return $this;
-	}
+      	{
+      		$this->isBlocked = $isBlocked;
+      
+      		return $this;
+      	}
 
 	/**
 	 * Returns the roles granted to the user.
@@ -210,10 +211,10 @@ class User implements UserInterface
 	 * @return string[] The user roles
 	 */
 	public function getRoles()
-	{
-		return array_merge(["ROLE_USER"], $this->roles);
-		// return ["ROLE_USER"];
-	}
+      	{
+      		return array_merge(["ROLE_USER"], $this->roles);
+      		// return ["ROLE_USER"];
+      	}
 
 	/**
 	 * Returns the password used to authenticate the user.
@@ -224,9 +225,9 @@ class User implements UserInterface
 	 * @return string|null The encoded password if any
 	 */
 	public function getPassword()
-	{
-		return $this->password;
-	}
+      	{
+      		return $this->password;
+      	}
 
 	/**
 	 * Returns the salt that was originally used to encode the password.
@@ -236,9 +237,9 @@ class User implements UserInterface
 	 * @return string|null The salt
 	 */
 	public function getSalt()
-	{
-		// return $this->salt;
-	}
+      	{
+      		// return $this->salt;
+      	}
 
 	/**
 	 * Returns the username used to authenticate the user.
@@ -246,9 +247,9 @@ class User implements UserInterface
 	 * @return string The username
 	 */
 	public function getUsername():string
-	{
-		return (string) $this->email;
-	}
+      	{
+      		return (string) $this->email;
+      	}
 
 	/**
 	 * Removes sensitive data from the user.
@@ -257,13 +258,13 @@ class User implements UserInterface
 	 * the plain-text password is stored on this object.
 	 */
 	public function eraseCredentials()
-	{
-	}
+      	{
+      	}
 
 	public function setPassword(string $password): self
-	{
-		$this->password = $password;
-
-		return $this;
-	}
+      	{
+      		$this->password = $password;
+      
+      		return $this;
+      	}
 }
