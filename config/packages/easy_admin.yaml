@@ -9,6 +9,7 @@ easy_admin:
                     - { property: 'name', label: 'Prénom' }
                     - { property: 'lastName', label: 'Nom' }
                     - { property: 'email', label: 'Email' }
+                    - { property: 'password', label: 'Mot de passe' }
                     - { property: 'isActive', label: 'Actif ?' }
             list:
                 max_results: 10

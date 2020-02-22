@@ -39,17 +39,22 @@
 
 #### Définir les termes suivants : Encoder, Provider, Firewall, Access Control, Role, Voter
 > - **Encoder** : C'est ce qui permet de hasher des champs d'une entity avec un algorythm particulier
-> - **Provider** : C'est le fournisseur d'utilisateur permettant de dire à Symfony la classe et et le champ d'identification à utiliser pour la sécurité de la gestion de l'utilisateur connecté. Celui ci permet de faire des controles de session et de base de données sur l'utilisateur à chaque nouvelle requete.
-> - **Firewall** : 
-> - **Access Control** : 
+> - **Provider** : C'est le fournisseur d'utilisateur permettant de dire à Symfony la classe et le champ d'identification à utiliser pour la sécurité de la gestion de l'utilisateur connecté. Celui ci permet de faire des controles de session et de base de données sur l'utilisateur à chaque nouvelle requete.
+> - **Firewall** : Le pare-feu en francais, c'est le système d'authentification. Symfony offre la possibilité de le configurer facilement
+> - **Access Control** : C'est une facon de pouvoir vérifier si l'utilisateur bénéficie d'un certain role lui donnant certains droits, avec la fonction twig is_granted('THE_ROLE')
 > - **Role** : Ce sont des permissions accordées à l'utilisateur
-> - **Voter** : 
+> - **Voter** : Ils permettent de vérifier les autorisations de l'utilisateur, et de repondre en conséquence.
 
 #### Qu'est-ce que FOSUserBundle ? Pourquoi ne pas l'utiliser ?
->
+> C'est un ensemble de composant permettant de gérer tout l'aspect utilisateur (formulaire de connexion, d'inscription, gestion du compte, mot de passe oublié, l'édition du profil, etc) et compatible avec Doctrine.
+> Les raisons de ne pas l'utiliser sont que la personnalisation y est obligatoire, la flexibilité des controller est limité et il est obligatoire d'overrider ces controllers, il possède de nombreuses fonctionnalités inutiles, et est complexe à mettre en place. 
+> Il vaut mieux privilégier le MakerBundle, plus simple, plus léger, plus flexible.
 
 #### Définir les termes suivants : Argon2i, Bcrypt, Plaintext, BasicHTTP
-> - **Argon2i** : 
-> - **Bcrypt** : 
-> - **Plaintext** : 
+> - **Argon2i** : C'est une fonction de hashage reconnue pour être très fiable, et qui à remporter le Password Hashing Competition en 2015. Depuis php 7.2, celle-ci fait parti de la fonction php password_hash en tant que constante possible.
+> - **Bcrypt** : C'est une fonction de hashage reconnue pour être très fiable également, et qui est la méthode par défault dans la fonction php_hash, et dans plein d'autres langage également. Celle-ci existe depuis 1999.
+> - **Plaintext** : Signifie que le texte est en clair, et donc non hashé.
 > - **BasicHTTP** : C'est une authentification HTTP peu sécurisé et non chiffré, qui necessite de recevoir les informations utilisateur dans l'entête de la requête. Les navigateurs mettent donc en cache (et non pas en cookie ou en session comme il est commun de le faire), afin d'évité d'avoir à redemander les identifiants de connexion à l'utilisateur à chaque navigation de page.
+
+#### Faire un schema expliquant quelle méthode est appelée dans quel ordre dans le LoginFormAuthenticator. Définir l'objectif de chaque méthodes du fichier.
+>

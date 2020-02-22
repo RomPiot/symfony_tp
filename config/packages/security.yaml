@@ -6,6 +6,11 @@ security:
             entity: 
                 class: App\Entity\User
                 property: email
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\AZERTY
+                property: email
 
     encoders:
         # use your user class name here
@@ -13,7 +18,11 @@ security:
             # Use native password encoder
             # This value auto-selects the best possible hashing algorithm
             # (i.e. Sodium when available).
-            algorithm: bcrypt
+            algorithm: plaintext
+        App\Entity\AZERTY:
+            algorithm: auto
+
+            
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -24,6 +33,13 @@ security:
             form_login:
                 login_path: login
                 check_path: login
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                # target: app_any_route
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -35,3 +51,4 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
