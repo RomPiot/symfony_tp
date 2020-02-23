@@ -11,6 +11,7 @@ easy_admin:
                     - { property: 'email', label: 'Email' }
                     - { property: 'password', label: 'Mot de passe' }
                     - { property: 'isActive', label: 'Actif ?' }
+                    # - { property: 'roles', label: 'Roles' } 
             list:
                 max_results: 10
                 fields:
