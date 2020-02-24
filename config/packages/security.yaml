@@ -44,6 +44,7 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/post, roles: ROLE_USER }
+        - { path: ^/post/add, roles: ROLE_AUTHOR }
         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         -
     role_hierarchy:

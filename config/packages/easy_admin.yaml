@@ -26,6 +26,7 @@ easy_admin:
                     - { property: 'email', label: 'Email' }
                     - { property: 'isActive', label: 'Actif ?' }
                     - { property: 'isBlocked', label: 'Bloqué ?' }
+                    - { property: 'roles', label: 'Role' }
 
         Post:
             class: App\Entity\Post
