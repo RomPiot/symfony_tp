@@ -65,14 +65,14 @@ class PostController extends AbstractController
 		$post = $postRepository->find($id);
 		$comments = $post->getComments();
 
-		$user = $userRepository->find(1);
+		$user = $this->getUser();
 
 		$comment = new Comment();
 		$comment->setPost($post);
 		$comment->setAuthor($user);
 
 		$form = $this->createFormBuilder($comment)
-			->add('content', TextareaType::class, ['label' => 'Contenu'])
+			->add('content', TextareaType::class, ['label' => 'Ajouter un commentaire'])
 			->add('save', SubmitType::class, ['label' => 'Envoyer'])
 			->getForm();
 		$form->handleRequest($request);
@@ -91,4 +91,31 @@ class PostController extends AbstractController
 			'form' => $form->createView()
 		]);
 	}
+
+    /**
+     * @Route("/post/edit/{id}", name="post_edit")
+     */
+    public function edit($id, PostRepository $postRepository, UserRepository $userRepository, Request $request, EntityManagerInterface $em)
+    {
+        $user = $this->getUser();
+        $post = $postRepository->find($id);
+
+        $form = $this->createFormBuilder($post)
+            ->add('title', TextType::class, ['label' => 'Titre'])
+            ->add('content', TextareaType::class, ['label' => 'Contenu'])
+            ->add('save', SubmitType::class, ['label' => 'Créer'])
+            ->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($post);
+            $em->flush();
+
+            return $this->redirectToRoute("post");
+        }
+
+        return $this->render('post/add.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
 }

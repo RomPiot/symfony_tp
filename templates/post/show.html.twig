@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block mainTitle %}{{ post.title }}{% endblock %}
 {% block content %}
+        <a href="{{ path('post_edit', {id:post.id}) }}" class="btn btn-outline-warning">Editer</a>
         <div class="the-post">
             <p class="post-content">{{ post.content }}</p>
         </div>
@@ -14,6 +15,9 @@
         {% endfor %}
     </div>
 
-    {% include 'comment/add.html.twig' %}
+    {% if is_granted('ROLE_USER') %}
+        {% include 'comment/add.html.twig' %}
+    {% endif %}
+
 
 {% endblock %}

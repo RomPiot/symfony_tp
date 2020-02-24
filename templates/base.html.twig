@@ -12,7 +12,7 @@
 		{% block body %}
         <div class="menu">
             <a class="menu-item" href="{{ path('post') }}">Accueil</a>
-            {% if is_granted('ROLE_ADMIN') %}
+            {% if is_granted('ROLE_AUTHOR') %}
                 <a class="menu-item" href="{{ path('post_add') }}">Ajouter Post</a>
             {% endif %}
         </div>
