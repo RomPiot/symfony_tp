@@ -59,13 +59,13 @@ class PostVoter extends Voter
 
         // the Post object could have, for example, a method isPrivate()
         // that checks a boolean $private property
-        return !$post->isPrivate();
+        return !$post->getIsPublished();
     }
 
     private function canEdit(Post $post, User $user)
     {
         // this assumes that the data object has a getOwner() method
         // to get the entity of the user who owns this data object
-        return $user === $post->getOwner();
+        return $user === $post->getAuthor();
     }
 }

@@ -100,6 +100,8 @@ class PostController extends AbstractController
         $user = $this->getUser();
         $post = $postRepository->find($id);
 
+        $this->denyAccessUnlessGranted('edit', $post);
+
         $form = $this->createFormBuilder($post)
             ->add('title', TextType::class, ['label' => 'Titre'])
             ->add('content', TextareaType::class, ['label' => 'Contenu'])
@@ -117,5 +119,27 @@ class PostController extends AbstractController
         return $this->render('post/add.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/post/publish/{id}", name="post_publish")
+     */
+    public function publish($id, PostRepository $postRepository, UserRepository $userRepository, Request $request, EntityManagerInterface $em)
+    {
+        $post = $postRepository->find($id);
+
+        if ($post->getIsPublished()) {
+            $post->setIsPublished(0);
+        } else {
+            $post->setIsPublished(1);
+        }
+
+        $em->persist($post);
+        $em->flush();
+
+        return $this->redirectToRoute("post_show", ["id" => $id]);
+
+
+
     }
 }

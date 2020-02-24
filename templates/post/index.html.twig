@@ -3,11 +3,13 @@
 {% block mainTitle %}Tous les posts{% endblock %}
 {% block content %}
     {% for post in posts %}
-        <div class="one-post">
-            <a href="{{ path('post_show', {id:post.id}) }}">
-                <h2 class="post-title">{{ post.title }}</h2>
-                <p class="post-short-content">{{ post.content|slice(0,500) }} ...</p>
-            </a>
-        </div>
+        {% if post.isPublished %}
+            <div class="one-post">
+                <a href="{{ path('post_show', {id:post.id}) }}">
+                    <h2 class="post-title">{{ post.title }}</h2>
+                    <p class="post-short-content">{{ post.content|slice(0,500) }} ...</p>
+                </a>
+            </div>
+        {% endif %}
     {% endfor %}
 {% endblock %}
