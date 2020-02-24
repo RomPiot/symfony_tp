@@ -11,7 +11,13 @@ easy_admin:
                     - { property: 'email', label: 'Email' }
                     - { property: 'password', label: 'Mot de passe' }
                     - { property: 'isActive', label: 'Actif ?' }
-                    # - { property: 'roles', label: 'Roles' } 
+                    - property: 'roles'
+                      type: choice
+                      type_options:
+                          mapped: true
+                          expanded: true
+                          multiple: true
+                          choices: {'Admin':'ROLE_ADMIN','Author':'ROLE_AUTHOR'}
             list:
                 max_results: 10
                 fields:

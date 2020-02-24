@@ -18,7 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 class PostController extends AbstractController
 {
 	/**
-	 * @Route("/", name="post")
+	 * @Route("/post", name="post")
 	 */
 	public function index(PostRepository $postRepository)
 	{

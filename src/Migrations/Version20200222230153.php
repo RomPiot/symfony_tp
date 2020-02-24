@@ -24,7 +24,7 @@ final class Version20200222230153 extends AbstractMigration
 
         $this->addSql('CREATE TEMPORARY TABLE __temp__user AS SELECT id, name, lastname, email, is_active, is_blocked, password FROM user');
         $this->addSql('DROP TABLE user');
-        $this->addSql('CREATE TABLE user (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name VARCHAR(255) NOT NULL COLLATE BINARY, lastname VARCHAR(255) NOT NULL COLLATE BINARY, email VARCHAR(255) NOT NULL COLLATE BINARY, is_active BOOLEAN DEFAULT \'1\' NOT NULL, is_blocked BOOLEAN DEFAULT \'0\' NOT NULL, password VARCHAR(255) DEFAULT \'\' NOT NULL COLLATE BINARY, roles CLOB DEFAULT \'\' NOT NULL --(DC2Type:json)
+        $this->addSql('CREATE TABLE user (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name VARCHAR(255) NOT NULL COLLATE BINARY, lastname VARCHAR(255) NOT NULL COLLATE BINARY, email VARCHAR(255) NOT NULL COLLATE BINARY, is_active BOOLEAN DEFAULT \'1\' NOT NULL, is_blocked BOOLEAN DEFAULT \'0\' NOT NULL, password VARCHAR(255) DEFAULT \'\' NOT NULL COLLATE BINARY, roles CLOB DEFAULT \'[]\' NOT NULL --(DC2Type:json)
         )');
         $this->addSql('INSERT INTO user (id, name, lastname, email, is_active, is_blocked, password) SELECT id, name, lastname, email, is_active, is_blocked, password FROM __temp__user');
         $this->addSql('DROP TABLE __temp__user');

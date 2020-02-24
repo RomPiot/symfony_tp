@@ -57,10 +57,10 @@ class User implements UserInterface
 	 */
 	private $isBlocked = 0;
 
-	/**
-	 * @ORM\Column(type="json", options={"default": ""})
-	 */
-	private $roles = [];
+    /**
+     * @ORM\Column(type="json", options={"default": "[]"})
+     */
+    private $roles = [];
 
 	/**
 	 * @ORM\Column(type="string", length=255, options={"default": ""})
@@ -70,7 +70,7 @@ class User implements UserInterface
 	public function __construct()
       	{
       		$this->posts = new ArrayCollection();
-      		$this->comments = new ArrayCollection();
+            $this->comments = new ArrayCollection();
       	}
 
 	public function __toString(): string
@@ -210,7 +210,7 @@ class User implements UserInterface
 	 *
 	 * @return string[] The user roles
 	 */
-	public function getRoles()
+	public function getRoles():array
       	{
 			$roles = $this->roles;
 			// guarantee every user at least has ROLE_USER
@@ -270,4 +270,11 @@ class User implements UserInterface
       
       		return $this;
       	}
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
 }
