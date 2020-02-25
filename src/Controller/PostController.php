@@ -9,11 +9,13 @@ use App\Repository\PostRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class PostController extends AbstractController
 {
@@ -31,9 +33,9 @@ class PostController extends AbstractController
 	/**
 	 * @Route("/post/add", name="post_add")
 	 */
-	public function add(UserRepository $userRepository, Request $request, EntityManagerInterface $em)
+	public function add(UserRepository $userRepository, Request $request, EntityManagerInterface $em, ValidatorInterface $validator)
 	{
-		$user = $userRepository->find(1);
+		$user = $this->getUser();
 		$post = new Post();
 		$post->setAuthor($user);
 
@@ -44,8 +46,21 @@ class PostController extends AbstractController
 			->getForm();
 		$form->handleRequest($request);
 
+        $errors = $validator->validate($user);
+
+        if (count($errors) > 0) {
+            /*
+             * Uses a __toString method on the $errors variable which is a
+             * ConstraintViolationList object. This gives us a nice string
+             * for debugging.
+             */
+            $errorsString = (string) $errors;
+
+            return new Response($errorsString);
+        }
+
+
 		if ($form->isSubmitted() && $form->isValid()) {
-			//            dd($post);
 			$em->persist($post);
 			$em->flush();
 
