@@ -43,7 +43,7 @@
 > - **Firewall** : Le pare-feu en francais, c'est le système d'authentification. Symfony offre la possibilité de le configurer facilement
 > - **Access Control** : C'est une facon de pouvoir vérifier si l'utilisateur bénéficie d'un certain role lui donnant certains droits, avec la fonction twig is_granted('THE_ROLE')
 > - **Role** : Ce sont des permissions accordées à l'utilisateur
-> - **Voter** : Ils permettent de vérifier les autorisations de l'utilisateur, et de repondre en conséquence.
+> - **Voter** : Ils permettent de vérifier les autorisations d'un utilisateur en particulier, et de repondre en conséquence.
 
 #### Qu'est-ce que FOSUserBundle ? Pourquoi ne pas l'utiliser ?
 > C'est un ensemble de composant permettant de gérer tout l'aspect utilisateur (formulaire de connexion, d'inscription, gestion du compte, mot de passe oublié, l'édition du profil, etc) et compatible avec Doctrine.
@@ -60,7 +60,7 @@
 >
 
 #### À quoi sert un service dans Symfony ?
-> c'est une classe PHP global qui remplit une fonction bien spécifique au sein de symfony, comme l'envoye d'emails, effectuer une tâche récurrente, etc. L’avantage d’un service est d’avoir un code modulaire et réutilisable partout dans l’application juste on faisant appel a celui-ci.
+> L’avantage d’un service est d’avoir un code modulaire et réutilisable partout dans l’application juste on faisant appel a celui-ci.
 
 #### Avez-vous déjà utilisé des services dans ce projet ? Si oui, lesquels ?
 > Oui, le Request, le Mailer, etc.
@@ -68,9 +68,9 @@
 #### Définir les termes suivant : 
 > - **Dependency** : 
 > - **Injection** : 
-> - **Service** : Voir la définition plus haut
+> - **Service** : C'est un objet PHP qui remplit une fonction bien spécifique au sein de symfony (comme l'envoye d'emails, effectuer une tâche récurrente, etc), associé à une configuration, qui a pour vocation d'être accessible n'importe où dans votre code
 > - **Autowiring** : C'est ce qui permet de gérer les services dans le conteneur avec une configuration minimale. Il lit les indications de type en paramètres des methodes des Controllers et transmet automatiquement les services corrects à chaque méthode.
-> - **Container** : C'est la boite à outil de Symfony. Il contient tous les services existant de l'application.
+> - **Container** : C'est la boite à outil de Symfony. Il permet d'instancier, d'organiser et de récupérer les nombreux services de votre application. 
 
 #### Quelle importance a les services dans le fonctionnement de Symfony ?
 > Les services dans Symfony sont très utile et important car ils servent à être injecté directement dans les paramètres des methodes afin de pouvoir utiliser immédiatement toutes les foncions qu'elles contiennent

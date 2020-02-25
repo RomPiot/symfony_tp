@@ -44,6 +44,11 @@ class PostVoter extends Voter
             return false;
         }
 
+        // ROLE_ADMIN can do anything! The power!
+        if ($this->security->isGranted('ROLE_ADMIN')) {
+            return true;
+        }
+
         // you know $subject is a Post object, thanks to supports
         /** @var Post $post */
         $post = $subject;
@@ -84,7 +89,7 @@ class PostVoter extends Voter
     {
         // this assumes that the data object has a getAuthor() method
         // to get the entity of the user who owns this data object
-        if (($this->canPublish($post, $user)) && $post->getIsPublished()) {
+        if (($this->canPublish($post, $user)) && $post->getIsPublished() OR ($user->getRoles() == "ROLE_ADMIN")) {
             return $user === $post->getAuthor();
         }
     }

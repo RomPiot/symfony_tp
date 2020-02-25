@@ -41,17 +41,17 @@ class RegistrationController extends AbstractController
 
 			// do anything else you need here, like send an email
 
-			// $emailUser = $user->getEmail();
+			 $emailUser = $user->getEmail();
 
-			// $email = (new Email())
-			// 	->from(new Address('roropiot5501@gmail.com', 'Romain'))
-			// 	->to($emailUser)
-			// 	->to('romainpiot.pro@gmail.com')
-			// 	->subject('Inscription - Symfony Local Project')
-			// 	->text('Compte créé !')
-			// 	->html('<p>C\'est super !</p>');
+			 $email = (new Email())
+			 	->from(new Address('roropiot5501@gmail.com', 'Romain'))
+			 	->to($emailUser)
+			 	->to('romainpiot.pro@gmail.com')
+			 	->subject('Inscription - Symfony Local Project')
+			 	->text('Compte créé !')
+			 	->html('<p>C\'est super !</p>');
 
-			// $mailer->send($email);
+			 $mailer->send($email);
 
 			return $guardHandler->authenticateUserAndHandleSuccess(
 				$user,
