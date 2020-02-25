@@ -128,6 +128,8 @@ class PostController extends AbstractController
     {
         $post = $postRepository->find($id);
 
+        $this->denyAccessUnlessGranted('publish', $post);
+
         if ($post->getIsPublished()) {
             $post->setIsPublished(0);
         } else {

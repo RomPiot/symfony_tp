@@ -5,17 +5,25 @@ use App\Entity\Post;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use Symfony\Component\Security\Core\Security;
 
 class PostVoter extends Voter
 {
     // these strings are just invented: you can use anything
-    const VIEW = 'view';
+    const DELETE = 'delete';
     const EDIT = 'edit';
+    const PUBLISH = 'publish';
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
 
     protected function supports($attribute, $subject)
     {
         // if the attribute isn't one we support, return false
-        if (!in_array($attribute, [self::VIEW, self::EDIT])) {
+        if (!in_array($attribute, [self::DELETE, self::EDIT, self::PUBLISH])) {
             return false;
         }
 
@@ -41,19 +49,21 @@ class PostVoter extends Voter
         $post = $subject;
 
         switch ($attribute) {
-            case self::VIEW:
-                return $this->canView($post, $user);
+            case self::DELETE:
+                return $this->canDelete($post, $user);
             case self::EDIT:
                 return $this->canEdit($post, $user);
+            case self::PUBLISH:
+                return $this->canPublish($post, $user);
         }
 
         throw new \LogicException('This code should not be reached!');
     }
 
-    private function canView(Post $post, User $user)
+    private function canDelete(Post $post, User $user)
     {
-        // if they can edit, they can view
-        if ($this->canEdit($post, $user)) {
+        // if they can edit, they can delete
+        if ($this->canPublish($post, $user)) {
             return true;
         }
 
@@ -62,10 +72,20 @@ class PostVoter extends Voter
         return !$post->getIsPublished();
     }
 
+    private function canPublish(Post $post, User $user)
+    {
+        // if they can edit, they can delete
+        if ($this->security->isGranted('ROLE_AUTHOR')) {
+            return $user === $post->getAuthor();
+        }
+    }
+
     private function canEdit(Post $post, User $user)
     {
-        // this assumes that the data object has a getOwner() method
+        // this assumes that the data object has a getAuthor() method
         // to get the entity of the user who owns this data object
-        return $user === $post->getAuthor();
+        if (($this->canPublish($post, $user)) && $post->getIsPublished()) {
+            return $user === $post->getAuthor();
+        }
     }
 }

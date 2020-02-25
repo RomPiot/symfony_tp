@@ -1,13 +1,20 @@
 {% extends 'base.html.twig' %}
 {% block mainTitle %}{{ post.title }}{% endblock %}
 {% block content %}
-    <a href="{{ path('post_edit', {id:post.id}) }}" class="btn btn-outline-warning">Editer</a>
 
-    {% if post.isPublished %}
-        <a href="{{ path('post_publish', {id:post.id}) }}" class="btn btn-danger">Dépublier</a>
-    {% else %}
-        <a href="{{ path('post_publish', {id:post.id}) }}" class="btn btn-success">Publier</a>
-    {% endif %}
+    {% if is_granted('publish', post) %}
+        <div class="d-flex justify-content-end">
+            <a href="{{ path('post_edit', {id:post.id}) }}" class="btn btn-outline-warning mr-2">Editer</a>
+
+            {% if post.isPublished %}
+                <a href="{{ path('post_publish', {id:post.id}) }}" class="btn btn-danger">Dépublier</a>
+            {% else %}
+                <a href="{{ path('post_publish', {id:post.id}) }}" class="btn btn-success">Publier</a>
+            {% endif %}
+        </div>
+
+            {% endif %}
+
 
     <div class="the-post">
             <p class="post-content">{{ post.content }}</p>
